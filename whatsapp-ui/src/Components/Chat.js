@@ -8,7 +8,7 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import SelectInput from "@material-ui/core/Select/SelectInput";
 import MicNoneIcon from "@material-ui/icons/MicNone";
 
-export default function Chat() {
+export default function Chat({ messages }) {
   const [input, setInput] = useState(" ");
 
   return (
@@ -34,21 +34,17 @@ export default function Chat() {
       </div>
 
       <div className="chat__body">
-        <p className="chat__message">
-          <span className="chat__name">Armand</span>
-          this is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat__receiver chat__message">
-          <span className="chat__name">Armand</span>
-          this is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat__message">
-          <span className="chat__name">Armand</span>
-          this is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
+        {messages.map((message) => (
+          <p
+            className={` chat__message ${
+              message.received && "chat__receiver"
+            } `}
+          >
+            <span className="chat__name">{message.name}</span>
+            {message.message}
+            <span className="chat__timestamp">{message.timestamp}</span>
+          </p>
+        ))}
       </div>
 
       <div className="chat__footer">
