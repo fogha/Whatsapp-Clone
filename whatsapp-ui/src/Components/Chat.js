@@ -7,9 +7,23 @@ import AttachFIle from "@material-ui/icons/AttachFile";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import SelectInput from "@material-ui/core/Select/SelectInput";
 import MicNoneIcon from "@material-ui/icons/MicNone";
+import axios from "../axios";
 
 export default function Chat({ messages }) {
   const [input, setInput] = useState(" ");
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+
+    axios.post("/messages/new", {
+      message: input,
+      name: "Demo",
+      timestamp: new Date().toUTCString(),
+      received: true,
+    });
+
+    setInput("");
+  };
 
   return (
     <div className="chat">
@@ -58,11 +72,13 @@ export default function Chat({ messages }) {
         <form>
           <input
             type="text"
-            // value={input}
-            // onChange={(e) => SelectInput(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Type a message..."
           />
-          {/* <button type="submit">Send a message</button> */}
+          <button type="submit" onClick={sendMessage}>
+            Send a message
+          </button>
         </form>
         <IconButton>
           <MicNoneIcon />

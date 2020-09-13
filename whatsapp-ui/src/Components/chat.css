@@ -91,6 +91,10 @@
   outline-width: 0;
 }
 
+.chat__footer > form > button {
+  display: none;
+}
+
 .chat__footerLeft > .MuiSvgIcon-root {
   padding: 10px;
   color: gray;
